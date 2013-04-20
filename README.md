@@ -8,11 +8,11 @@ It was designed to allow you to quickly build [RESTful](https://en.wikipedia.org
 
 ###Should I use Shepherd for my production website?
 
-Probably not. This is my first attempt at an MVC, and it wasn't built to be used in production. There are a number of more-developed PHP frameworks out there with great communities (from what I hear) that would probably work better for you. In no particular order, here's a short list: [CakePHP](http://cakephp.org/), [CodeIgniter](http://ellislab.com/codeigniter), [Symfony](http://symfony.com/), [Zend](http://framework.zend.com/), and one that's definitely worth a look: [Tonic](http://peej.github.io/tonic/).
+Probably not. This wasn't built to be used in production. There are a number of more-developed PHP frameworks out there with great communities (from what I hear) that would probably work better for you. In no particular order, here's a short list: [CakePHP](http://cakephp.org/), [CodeIgniter](http://ellislab.com/codeigniter), [Symfony](http://symfony.com/), [Zend](http://framework.zend.com/), and a lesser-known one that's worth a look: [Tonic](http://peej.github.io/tonic/).
 
 ###Then what should I use this for?
 
-Shepherd is probably best used as a tool for learning. On account of it being my first take at an MVC, I imagine that it may be a simpler to study than other frameworks. If you're interested in learning how to write your own MVC, like me, then I encourage you to peruse the source.
+Shepherd is probably best suited to be a learning tool. If you're interested in learning how to write your own MVC, like me, then I encourage you to peruse the source.
 
 ##Installation
 
@@ -32,20 +32,20 @@ The Config.php file contains a class that defines constants that can be used to 
 - `MEDIA_URL`: If you wish to change the URL to access media. The default is `/media`.
 - `STATIC_DIRECTORY`: The location of the static files of your site, like `.css` and `.js` files.
 - `STATIC_URL`: The URL to access those static files.
-- `DATA_DIRECTORY`: The directory for data files, like `.xml` or `.json`. Not accessible via any URL.
-- `LOGIN_URL`: If you set up authentication on your site, this is the path users will be redirected to if they are unauthorized.
+- `DATA_DIRECTORY`: The directory for data files, like `.xml` or `.json`. This data is not directly accessible via any URL.
+- `LOGIN_URL`: If you set up authentication on your site, this is the path users will be redirected to when they are unauthorized.
 
 ##Url Routing
 
 Shepherd looks for a single file, `urls.php`, in the project directory. To write URLs, instantiate a new `Urls` object, passing it an array whose values take the form:
 
-    'regex to match' -> 'view name'
+    'regex to match' => 'view name'
 
 To take a simple example, you might write:
 
     new Urls(
       array(
-        '~[0-9]{4}/?$~'   =>   'numbers',
+        '~[0-9]{4}/?$~'   =>   'numbers',  // This would catch /3432 and pass it the view 'numbers'
         'login/?$'        =>   'login'
       )
     );
@@ -66,11 +66,11 @@ There's one other helper function: `GET_Ajax`. If this function exists when your
 
 ###The Four View Functions
 
-What you do inside those functions is up to you. You can load a template to display, gather data to echo, or send back an HTTP response.
+What you do inside these functions is up to you. Common things would be gathering data, loading an `html` template to display data, or send back some HTTP response.
 
 ####HTTP Responses
 
-It's really easy to reply with the most common HTTP header responses. Simply instantiate a new `httpHeaderResponse` object in your view, passing it the name of the response you'd like to give. For instance, a 404 error can be given by:
+It happens that it's really easy to reply with the most common HTTP header responses. Simply instantiate a new `httpHeaderResponse` object in your view, passing it the name of the response you'd like to give. For instance, a 404 error can be given by:
 
     new httpHeaderResponse( 'Not Found' );
 

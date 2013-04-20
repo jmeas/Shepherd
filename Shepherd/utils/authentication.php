@@ -33,9 +33,9 @@ class Authentication {
       $cookieUser = $cookieData[0];
       $cookieHash = $cookieData[1];
 
-      if (file_exists("../../".Config::SITE_NAME."/data/users/persistence/{$cookieUser}.json")) {
+      if (file_exists("../../".Config::PROJECT_NAME."/data/users/persistence/{$cookieUser}.json")) {
 
-        $json = file_get_contents("../../".Config::SITE_NAME."/data/users/persistence/{$cookieUser}.json");
+        $json = file_get_contents("../../".Config::PROJECT_NAME."/data/users/persistence/{$cookieUser}.json");
         $jsonPhp = json_decode($json);
 
         if (isset($jsonPhp->key) && $jsonPhp->key == $cookieHash) {
@@ -68,9 +68,9 @@ class Authentication {
 
   private function validCredentials($secureString) {
 
-    if (file_exists("../../".Config::SITE_NAME."/data/users/users.json")) {
+    if (file_exists("../../".Config::PROJECT_NAME."/data/users/users.json")) {
 
-      $json = file_get_contents("../../".Config::SITE_NAME."/data/users/users.json");
+      $json = file_get_contents("../../".Config::PROJECT_NAME."/data/users/users.json");
       $jsonIterator = new RecursiveIteratorIterator(
         new RecursiveArrayIterator(json_decode($json, TRUE)),
         RecursiveIteratorIterator::SELF_FIRST);
@@ -97,9 +97,9 @@ class Authentication {
     $password = $_POST['inputPassword'];
     $semisecure = crypt(md5($password),md5($user));
 
-    if (file_exists("../../".Config::SITE_NAME."/data/users/users.json")) {
+    if (file_exists("../../".Config::PROJECT_NAME."/data/users/users.json")) {
 
-      $json = file_get_contents("../../".Config::SITE_NAME."/data/users/users.json");
+      $json = file_get_contents("../../".Config::PROJECT_NAME."/data/users/users.json");
       $jsonIterator = new RecursiveIteratorIterator(
         new RecursiveArrayIterator(json_decode($json, TRUE)),
         RecursiveIteratorIterator::SELF_FIRST);
@@ -136,7 +136,7 @@ class Authentication {
     // This saves your persistence to the database
     $jsonString = '{ "key" : "'.$timedHash.'" }';
 
-    file_put_contents("../../".Config::SITE_NAME."/data/users/persistence/{$user}.json", $jsonString);
+    file_put_contents("../../".Config::PROJECT_NAME."/data/users/persistence/{$user}.json", $jsonString);
 
 
   }

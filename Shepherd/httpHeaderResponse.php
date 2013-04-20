@@ -2,7 +2,7 @@
 
 class httpHeaderResponse {
 
-  protected $_httpResponses = array(
+  private $_httpResponses = array(
 
     'Continue' => '100',
     'Switching Protocols' => '101',
@@ -46,11 +46,11 @@ class httpHeaderResponse {
 
   // The actual response
 
-  function __construct($response) {
+  function __construct( $response ) {
 
-    if (array_key_exists($response, $this->_httpResponses)) {
-      $protocol = (isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0');
-      header($protocol . ' ' . $this->_httpResponses[$response] . ' ' . $response);
+    if ( array_key_exists($response, $this->_httpResponses) ) {
+      $protocol = ( isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0' );
+      header( $protocol . ' ' . $this->_httpResponses[$response] . ' ' . $response );
     }
 
   }

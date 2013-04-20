@@ -4,17 +4,17 @@
 
 class Urls {
 
-  protected $_host;                   // The protocol and host; i.e., http://example.com
+  private $_host;                   // The protocol and host; i.e., http://example.com
+  private $_appUrls;                // An array of URLs and the view they correspond to
+  private $_view;                   // This URL's view
+  private $_pointsToFile = false;   // Whether this URL corresponds to a file or not
+  private $_fileServer;             // The object that can serve a file for this URL
   public static $url;                    // The location; i.e., people/brianj
-  protected $_appUrls;                // An array of URLs and the view they correspond to
-  protected $_view;                   // This URL's view
-  protected $_pointsToFile = false;   // Whether this URL corresponds to a file or not
-  protected $_fileServer;             // The object that can serve a file for this URL
 
   function __construct( $appUrls ) {
 
-    $host = 'http://'.$_SERVER[HTTP_HOST];  
-    $url = ltrim( $_SERVER['REQUEST_URI'], '/' );    
+    $host = 'http://'.$_SERVER[HTTP_HOST];          // Scope this
+    $url = ltrim( $_SERVER['REQUEST_URI'], '/' );   // This, too
     
     $this->_host = $host;
     Urls::$url = strtok( $url, '?' );
@@ -48,7 +48,7 @@ class Urls {
       //Tries to find a match
       preg_match_all( $regex, Urls::$url, $match );
 
-      $matchedurl = implode( '',$match[0] );
+      $matchedurl = implode( '',$match[0] );          // Scope this
 
       if ( $matchedurl == Urls::$url ) {
         $this->_view = $view;

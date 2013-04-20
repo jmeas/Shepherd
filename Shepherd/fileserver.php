@@ -4,10 +4,10 @@
 
 class FileServer {
 
-  protected $_url;                    // The URL of the file
-  protected $_fileExtension;          // The requested file's extension
-  protected $_fileLocation;           // The location of the file to serve
-  protected $_mimeTypes = array(      // File MIME types
+  private $_url;                    // The URL of the file
+  private $_fileExtension;          // The requested file's extension
+  private $_fileLocation;           // The location of the file to serve
+  private $_mimeTypes = array(      // File MIME types
     '3dm' => 'x-world/x-3dmf', '3dmf' => 'x-world/x-3dmf', 'a' => 'application/octet-stream', 'aab' => 'application/x-authorware-bin',
     'aam' => 'application/x-authorware-map', 'aas' => 'application/x-authorware-seg', 'abc' => 'text/vnd.abc', 'acgi' => 'text/html',
     'afl' => 'video/animaflex', 'ai' => 'application/postscript', 'aif' => 'audio/aiff', 'aif' => 'audio/x-aiff',
@@ -182,12 +182,14 @@ class FileServer {
 
   function fileExists() {
 
-    $replacees = array( "\\", "../../" . strtolower(Config::SITE_NAME), Config::STATIC_URL . "/" );
+    // Rewrite this to allow for STATIC_URL and MEDIA_URL variables
+
+    $replacees = array( "\\", "../../" . strtolower(Config::PROJECT_NAME), Config::STATIC_DIRECTORY . "/" );
     $replacers = array( "/", "", "" );
 
-    if (file_exists( '../../' . strtolower(Config::SITE_NAME) . Config::STATIC_URL ) && is_dir('../../' . strtolower(Config::SITE_NAME) . Config::STATIC_URL)) {
+    if (file_exists( '../../' . strtolower(Config::PROJECT_NAME) . Config::STATIC_DIRECTORY ) && is_dir('../../' . strtolower(Config::PROJECT_NAME) . Config::STATIC_DIRECTORY)) {
 
-      $di = new RecursiveDirectoryIterator('../../' . strtolower(Config::SITE_NAME) . Config::STATIC_URL);
+      $di = new RecursiveDirectoryIterator('../../' . strtolower(Config::PROJECT_NAME) . Config::STATIC_DIRECTORY);
 
       foreach ( new RecursiveIteratorIterator($di) as $filename => $file ) {
   

@@ -7,10 +7,9 @@ class View {
   protected $_template; // The template to use
   protected $_ajax;     // A boolean representing whether or not this is an AJAX request
   protected $_loginRequired = false;
-  public static $data;
   protected $_url;
   protected $_loggedIn = false;
-
+  public static $data;
 
   function __construct($url) {
 
@@ -50,47 +49,47 @@ class View {
 
   function GET() {
 
-    new httpHeaderResponse('OK');
+    new httpHeaderResponse( 'OK' );
 
   }
 
   function POST() {
 
-    new httpHeaderResponse('Forbidden');
+    new httpHeaderResponse( 'Forbidden' );
 
   }
 
   function DELETE() {
 
-    new httpHeaderResponse('Forbidden');
+    new httpHeaderResponse( 'Forbidden' );
 
   }
 
   function PUT() {
 
-    new httpHeaderResponse('Forbidden');
+    new httpHeaderResponse( 'Forbidden' );
 
   }
 
   protected function iShouldRender() {
-    if (!Tools::isNullOrEmptyString( $this->_template) && !$_this->ajax)
+    if ( !Tools::isNullOrEmptyString( $this->_template) && !$_this->ajax )
       return true;
     return false;
   }
   protected function isPermitted() {
-    if ($this->_loginRequired && $this->_loggedIn)
+    if ( $this->_loginRequired && $this->_loggedIn )
       return true;
-    else if (!$this->_loginRequired)
+    else if ( !$this->_loginRequired )
       return true;
     return false;
   }
 
   function __destruct() {
 
-    if ($this->isPermitted())
+    if ( $this->isPermitted() )
     {
       $ajaxMethodName = $this->_method . '_Ajax';
-      if ($this->_ajax && method_exists($this, $ajaxMethodName))
+      if ( $this->_ajax && method_exists($this, $ajaxMethodName) )
         $this->{$ajaxMethodName}();
       else
         $this->{$this->_method}();
@@ -98,10 +97,10 @@ class View {
     }
     else {
       $_SESSION['redirectUrl'] = Urls::$url;
-      header('Location:'.$host.'/'.Config::LOGIN_URL);
+      header( 'Location:'.$host.'/'.Config::LOGIN_URL );
     }
 
-    if ($this->iShouldRender())
+    if ( $this->iShouldRender() )
       new Render( $this->_template, View::$data );
 
   }

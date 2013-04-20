@@ -2,10 +2,10 @@
 
 class Render {
 
-  protected $_loader;
-  protected $_page;
-  protected $_template;
-  protected $_data;
+  private $_loader;
+  private $_page;
+  private $_template;
+  private $_data;
 
   function __construct( $template, $data ) {
 
@@ -16,7 +16,7 @@ class Render {
     require_once '../twig/Autoloader.php';
     Twig_Autoloader::register();
 
-    $templateDir = '../../'.strtolower( Config::SITE_NAME ).'/templates';
+    $templateDir = '../../'.strtolower( Config::PROJECT_NAME ).'/templates';
 
     if ( file_exists($templateDir) && is_dir($templateDir) ) {
       $this->_loader = new Twig_Loader_Filesystem( $templateDir );
