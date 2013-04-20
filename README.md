@@ -4,11 +4,11 @@ _version 0.5.0_
 
 Shepherd is a simple PHP framework that was influenced by the [MVC](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) and [RMR](http://www.peej.co.uk/articles/rmr-architecture.html) architectures.
 
-It was designed to allow you to quickly build RESTful webapps.
+It was designed to allow you to quickly build [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) webapps.
 
 ###Should I use Shepherd for my production website?
 
-Probably not. This is my first attempt at an MVC, and it wasn't built to be used in production. There are a number of more-developed PHP frameworks out there with great communities (from what I hear) that would probably work better for you. In no particular order, here's a short list: [CakePHP](http://cakephp.org/), [CodeIgniter](http://ellislab.com/codeigniter), [Symfony](http://symfony.com/), [Zend](http://framework.zend.com/), and one that's definitely worth a look: [Tonic](http://peej.github.io/tonic/) (an [RMR](http://www.peej.co.uk/articles/rmr-architecture.html) framework).
+Probably not. This is my first attempt at an MVC, and it wasn't built to be used in production. There are a number of more-developed PHP frameworks out there with great communities (from what I hear) that would probably work better for you. In no particular order, here's a short list: [CakePHP](http://cakephp.org/), [CodeIgniter](http://ellislab.com/codeigniter), [Symfony](http://symfony.com/), [Zend](http://framework.zend.com/), and one that's definitely worth a look: [Tonic](http://peej.github.io/tonic/).
 
 ###Then what should I use this for?
 
@@ -16,9 +16,9 @@ Shepherd is probably best used as a tool for learning. On account of it being my
 
 ##Installation
 
-Place the Shepherd source files in `/Frameworks/Shepherd/`.
+Place the Shepherd source files in `Frameworks/Shepherd/`.
 
-Then, put the `config.php` file into the root of your project along with the proper server configuration file. The source contains both a `.webconfig` file for IIS and an `.htaccess` file for Apache. If you're on another server, you'll need to set up a URL rewrite rule that takes all requests and points them to `/Frameworks/Shepherd/autoload.php`.
+Then, put the `config.php` file into the root of your project along with the proper server configuration file. The source contains both a `.webconfig` file for IIS and an `.htaccess` file for Apache. If you're on another server, you'll need to set up a URL rewrite rule that takes all requests and points them to `Frameworks/Shepherd/autoload.php`.
 
 _If you wish to change the directory of your Shepherd install, the only thing you'll need to change is the path in your server's rewrite rule._
 
@@ -60,7 +60,7 @@ Shepherd looks inside the `{PROJECT_NAME}/views` folder to locate your views. Ea
 
 Views work with 4 core functions that correspond to the four HTTP methods: `GET`, `POST`, `PUT`, and `DELETE`. In this way, Shepherd promotes building RESTful webapps.
 
-By default, Shepherd responds to any `GET` requests with a 200 OK response, while the other three are responded to with `403 FORBIDDEN`.
+By default, Shepherd responds to any `GET` requests with a 200 OK response, while the other three are given a `403 FORBIDDEN`.
 
 There's one other helper function: `GET_Ajax`. If this function exists when your page is accessed via Ajax, it will be called instead of the regular `GET` function.
 
