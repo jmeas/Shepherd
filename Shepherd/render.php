@@ -16,7 +16,7 @@ class Render {
     require_once '../twig/Autoloader.php';
     Twig_Autoloader::register();
 
-    $templateDir = '../../'.strtolower( Config::PROJECT_NAME ).'/templates';
+    $templateDir = '../../'.strtolower( Config::PROJECT_NAME ).Config::TEMPLATES_DIRECTORY;
 
     if ( file_exists($templateDir) && is_dir($templateDir) ) {
       $this->_loader = new Twig_Loader_Filesystem( $templateDir );

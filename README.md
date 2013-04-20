@@ -29,11 +29,16 @@ The Config.php file contains a class that defines constants that can be used to 
 - `PROJECT_NAME`: The (case-sensitive) name of the directory that Shepherd looks in to find your site's files.
 - `DEBUG`: A boolean representing whether the site is in Debug mode or not. Displays some (not many) Shepherd-related errors when set to true.
 - `MEDIA_DIRECTORY`: The directory Shepherd looks in to find user-uploaded content.
-- `MEDIA_URL`: If you wish to change the URL to access media. The default is `/media`.
 - `STATIC_DIRECTORY`: The location of the static files of your site, like `.css` and `.js` files.
-- `STATIC_URL`: The URL to access those static files.
 - `DATA_DIRECTORY`: The directory for data files, like `.xml` or `.json`. This data is not directly accessible via any URL.
+- `VIEWS_DIRECTORY`: Where Shepherd will look to find your app's view files.
+- `TEMPLATES_DIRECTORY`: The base directory for your template files
 - `LOGIN_URL`: If you set up authentication on your site, this is the path users will be redirected to when they are unauthorized.
+
+####Coming Soon
+
+- `MEDIA_URL`: If you wish to change the URL to access media. The default is `/media`.
+- `STATIC_URL`: The URL to access those static files.
 
 ##Url Routing
 

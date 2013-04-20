@@ -4,11 +4,11 @@ class Config {
 
   // The directory that your project is in
 
-  const SITE_NAME = 'your-project-name';
+  const PROJECT_NAME = 'harmony';
 
   // Turn on error display
   
-  const DEBUG = false;
+  const DEBUG = true;
 
   // The default username and password
   // to the Lovelace Admin Panel:
@@ -18,14 +18,18 @@ class Config {
   const ADMIN_PW = '';
 
   // The directory for user-uploaded media
-  const MEDIA_URL = '/media';
+  const MEDIA_DIRECTORY = '/media';
 
-  // The directory for your app's static files; i.e.
-  // css, js files.
-  const STATIC_URL = '/static';
+  // The directory for your app's static files
+  const STATIC_DIRECTORY = '/static';
 
-  // The directory for data files; XML, JSON, and so on
-  const DATA_URL = '/data';
+  // The spot for your data files; XML, JSON, and so on
+  const DATA_DIRECTORY = '/data';
+
+  // Where you keep your app's view files
+  const VIEWS_DIRECTORY = '/views';
+
+  const TEMPLATES_DIRECTORY = '/templates';
 
   const LOGIN_URL = 'login';
 
