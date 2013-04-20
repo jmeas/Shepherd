@@ -1,6 +1,6 @@
 <?php
 
-// This class is still quite seriously a work-in-progress.
+// This class is quite seriously a work-in-progress.
 
 class DataObject {
 

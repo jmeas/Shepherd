@@ -4,11 +4,11 @@ _version 0.5.0_
 
 Shepherd is a simple PHP framework that was influenced by the [MVC](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) and [RMR](http://www.peej.co.uk/articles/rmr-architecture.html) architectures.
 
-It was created to allow you to quickly build a RESTful website.
+It was designed to allow you to quickly build RESTful webapps.
 
 ###Should I use Shepherd for my production website?
 
-Probably not. This is my first attempt at an MVC, and it wasn't built to be used in production. There are a number of more extensive PHP frameworks out there with great communities (from what I hear) that would probably work better for your project. In no particular order, here's a short list: [CakePHP](http://cakephp.org/), [CodeIgniter](http://ellislab.com/codeigniter), [Symfony](http://symfony.com/), [Zend](http://framework.zend.com/), and one that's definitely worth a look: [Tonic](http://peej.github.io/tonic/) (an [RMR](http://www.peej.co.uk/articles/rmr-architecture.html) framework).
+Probably not. This is my first attempt at an MVC, and it wasn't built to be used in production. There are a number of more-developed PHP frameworks out there with great communities (from what I hear) that would probably work better for you. In no particular order, here's a short list: [CakePHP](http://cakephp.org/), [CodeIgniter](http://ellislab.com/codeigniter), [Symfony](http://symfony.com/), [Zend](http://framework.zend.com/), and one that's definitely worth a look: [Tonic](http://peej.github.io/tonic/) (an [RMR](http://www.peej.co.uk/articles/rmr-architecture.html) framework).
 
 ###Then what should I use this for?
 
@@ -39,14 +39,14 @@ The Config.php file contains a class that defines constants that can be used to 
 
 Shepherd looks for a single file, `urls.php`, in the project directory. To write URLs, instantiate a new `Urls` object, passing it an array whose values take the form:
 
-    `regex to match` -> `view name`
+    'regex to match' -> 'view name'
 
 To take a simple example, you might write:
 
     new Urls(
       array(
         '~[0-9]{4}/?$~'   =>   'numbers',
-        'login/?$'        =>   'login',
+        'login/?$'        =>   'login'
       )
     );
 
@@ -58,7 +58,7 @@ Shepherd looks inside the `{PROJECT_NAME}/views` folder to locate your views. Ea
       // Functions and variables here
     }
 
-Views work with 4 core functions that correspond to the four HTTP methods: `GET`, `POST`, `PUT`, and `DELETE`. In this way, Shepherd makes it pretty easy to build RESTful webapps.
+Views work with 4 core functions that correspond to the four HTTP methods: `GET`, `POST`, `PUT`, and `DELETE`. In this way, Shepherd promotes building RESTful webapps.
 
 By default, Shepherd responds to any `GET` requests with a 200 OK response, while the other three are responded to with `403 FORBIDDEN`.
 
@@ -74,13 +74,13 @@ It's really easy to reply with the most common HTTP header responses. Simply ins
 
     new httpHeaderResponse( 'Not Found' );
 
-####Data
+####Resources
 
-Shepherd comes with a simple system for handling `.json` data. But right now it really needs to be refactored.
+Shepherd comes with a simple system for handling resources stored in `json` files. But right now it's in need of some major work.
 
 ##Templating
 
-Shepherd is configured to work with the [Twig](http://twig.sensiolabs.org/) templating system right out of the box. If you set the `$_template` variable within a function, Shepherd will look for that Twig template file in the `{PROJECT_NAME}/templates` folder.
+Shepherd is configured to work with the [Twig](http://twig.sensiolabs.org/) templating system right out of the box. If you set the `$_template` variable within your class, Shepherd will look for that Twig template file in the `{PROJECT_NAME}/templates` folder.
 
 For instance, inside the `GET` function of the `Login` view above, we might do:
 
