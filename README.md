@@ -1,4 +1,4 @@
-<strong></strong>#Shepherd
+#Shepherd
 
 _version 0.5.0_
 
