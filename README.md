@@ -81,11 +81,11 @@ What you do inside the core functions is up to you. Common things would be gathe
 
 ####HTTP Responses
 
-IIt's really easy to reply with the most common HTTP header responses. Simply instantiate a new `httpHeaderResponse` object in your view, passing it the name of the response you'd like to give. For instance, a 404 error can be given by:
+It's really simple to set up server responses with the most common HTTP response headers. Simply instantiate a new `httpResponse` object in your view, passing it the name of the response you'd like to give. For instance, a 404 error can be given by:
 
-    new httpHeaderResponse( 'Not Found' );
+    new httpResponse( 'Not Found' );
 
-_Note: The httpHeaderResponse object sets a header variable. What this means is that no output can be sent (like an `echo`, for instance) before you instantiate the object._
+_Note: A header is set in the constructor of the httpResponse object. What this means is that no output can be sent (like an `echo`) before you instantiate the object._
 
 ####Resources
 

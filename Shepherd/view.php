@@ -47,29 +47,13 @@ class View {
 
   // The default responses
 
-  function GET() {
+  function GET()    { new httpResponse( 'OK' );        }
 
-    new httpHeaderResponse( 'OK' );
+  function POST()   { new httpResponse( 'Forbidden' ); }
 
-  }
+  function DELETE() { new httpResponse( 'Forbidden' ); }
 
-  function POST() {
-
-    new httpHeaderResponse( 'Forbidden' );
-
-  }
-
-  function DELETE() {
-
-    new httpHeaderResponse( 'Forbidden' );
-
-  }
-
-  function PUT() {
-
-    new httpHeaderResponse( 'Forbidden' );
-
-  }
+  function PUT()    { new httpResponse( 'Forbidden' ); }
 
   protected function iShouldRender() {
     if ( !Tools::isNullOrEmptyString( $this->_template) && !$_this->ajax )
