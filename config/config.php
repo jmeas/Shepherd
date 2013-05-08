@@ -2,28 +2,35 @@
 
 class Config {
 
-  // The directory that your project is in
+  // The name of your project;
+  // also the directory that your project is in
 
-  const PROJECT_NAME = 'harmony';
+  const PROJECT_NAME = 'my-app';
 
   // Turn on error display
   
   const DEBUG = true;
 
   // The default username and password
-  // to the Lovelace Admin Panel:
+  // to the Shepherd Admin Panel:
   // http://yoursite.com/admin
 
   const ADMIN_USER = '';
   const ADMIN_PW = '';
 
   // The directory for user-uploaded media
-  const MEDIA_DIRECTORY = '/media';
+  const MEDIA_DIRECTORY = '/what';
 
-  // The directory for your app's static files
+  // The base Url to access media files
+  const MEDIA_URL = '/media';
+
+  // The directory in your webapp where you store static files
   const STATIC_DIRECTORY = '/static';
 
-  // The spot for your data files; XML, JSON, and so on
+  // The base Url to access those static files
+  const STATIC_URL = '';
+
+  // The spot for your data files: XML, JSON, and so on
   const DATA_DIRECTORY = '/data';
 
   // Where you keep your app's view files
