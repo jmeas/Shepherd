@@ -1,6 +1,6 @@
 #Shepherd
 
-_version 0.5.1_
+_version 0.5.2_
 
 Shepherd is a simple PHP framework that was influenced by the [MVC](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) and [RMR](http://www.peej.co.uk/articles/rmr-architecture.html) architectures.
 
@@ -22,7 +22,7 @@ To start, place the Shepherd source files in `Frameworks/Shepherd/`.
 
 Then, put the `config.php` file into the root of your project along with the proper server configuration file. The source contains both a `.webconfig` file for IIS and an `.htaccess` file for Apache. If you're on another server, you'll need to set up a URL rewrite rule that takes all requests and points them to `Frameworks/Shepherd/autoload.php`.
 
-_If you wish to change the directory of your Shepherd install, the only thing you'll need to change is the path in your server's rewrite rule._
+_As of now there is no simple way to change the directory of where you install Shepherd._
 
 ###Configuration
 
@@ -31,16 +31,14 @@ The Config.php file contains a class that defines constants that can be used to 
 - `PROJECT_NAME`: The (case-sensitive) name of the directory that Shepherd looks in to find your site's files.
 - `DEBUG`: A boolean representing whether the site is in Debug mode or not. Displays some (not many) Shepherd-related errors when set to true.
 - `MEDIA_DIRECTORY`: The directory Shepherd looks in to find user-uploaded content.
+- `MEDIA_URL`: The URL to access media files.
 - `STATIC_DIRECTORY`: The location of the static files of your site, like `.css` and `.js` files.
+- `STATIC_URL`: The URL to access those static files.
 - `DATA_DIRECTORY`: The directory for data files, like `.xml` or `.json`. This data is not directly accessible via any URL.
 - `VIEWS_DIRECTORY`: Where Shepherd will look to find your app's view files.
 - `TEMPLATES_DIRECTORY`: The base directory for your template files
 - `LOGIN_URL`: If you set up authentication on your site, this is the path users will be redirected to when they are unauthorized.
 
-####Coming Soon
-
-- `MEDIA_URL`: If you wish to change the URL to access media. The default is `/media`.
-- `STATIC_URL`: The URL to access those static files.
 
 ##Url Routing
 
@@ -57,14 +55,14 @@ To take a simple example, you might write:
       )
     );
 
-_Note: View names in the URL scheme (and across Shepherd, in general) are **case-insensitive**._
+_Note: View names in the URL scheme (and across Shepherd in general) are **case-insensitive**._
 
 ##Views
 
 Shepherd looks inside the `{PROJECT_NAME}/views` folder to locate your views. Each view should go in a file that has the same name as the view, and that file should define a Class that yet again uses that same name. For instance, we may have (continuing the above example), a file `login.php` that contains:
 
     class Numbers extends View {
-      // Functions and variables here
+      // Do your things
     }
 
 Views have 4 core functions that correspond to the four HTTP methods: `GET`, `POST`, `PUT`, and `DELETE`. In this way, Shepherd promotes building RESTful webapps.
@@ -73,7 +71,7 @@ By default, Shepherd responds to any `GET` requests with a 200 OK response, whil
 
 There's one other core helper function: `GET_Ajax`. If this function exists when your page is accessed via Ajax, it will be called instead of the regular `GET` function.
 
-Of course, you're not limited to these four functions by any means. However, it is good practice to have other function calls stem from these five so that it is easy to follow the flow of a web request.
+Of course, you're not limited to these four functions by any means. However, it is good practice to have other function calls stem from these five so that it is easy to follow the flow of a web response.
 
 ###The Four View Functions
 
@@ -107,20 +105,20 @@ This would look for the file `{PROJECT_NAME}/templates/app/login.html` to render
 
 *Note: The rendering of a template is done in the destructor of a view.*
 
-_Note: If you wish to use another templating system, all of the Twig code can be found in the `render.php` file. It should be pretty simple to swap Twig for any system you want._
+_Note: If you wish to use another templating system, all of the Twig code can be found within `render.php`. It should be pretty straightforward to swap Twig for any framework you prefer._
 
 ##Utils
 
 The utilities of Shepherd are classes that contain static methods you can call at any time to, well, do things.
 
 ###Authentication
-
-The authentication util works with data stored in `.json` files. I can't say that I would suggest you to use `Json` for storing secure user data; I'm just using it temporarily as I build the Authentication class.
+ 
+The authentication util works with data stored in `.json` files. It's still a work in progress.
 
 ####Cookie Based Sessions
 
-Though Shepherd uses `Json`, the rest of its authentication is fairly robust.
+Shepherd uses cookies to handle user login states. More on this soon.
 
 ###Tools
 
-The Tools util provides a number of static commonly-used PHP functions. A list of those is coming soon.
+The Tools util provides a number of static commonly-used PHP functions. Documentation on this is also coming soon.

@@ -11,14 +11,13 @@ class View {
   protected $_loggedIn = false;
   public static $data;
 
-  function __construct($url) {
+  function __construct() {
 
     session_start();
 
     $this->_method = $this->setMethod();
     $this->_ajax = $this->isThisAjax();
     View::$data = array();
-    $this->_url = $url;
     $this->_loggedIn = Authentication::loggedIn();
 
   }

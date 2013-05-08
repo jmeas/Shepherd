@@ -4,9 +4,13 @@
 
 class FileServer {
 
-  private $_url;                    // The URL of the file
-  private $_fileExtension;          // The requested file's extension
-  private $_fileLocation;           // The location of the file to serve
+  private $_url;                    // The URL request
+  private $_fileExtension;          // The file extension of the request
+  private $_dirName;                // The directory of the request
+  private $_baseName;               // The base name of the request
+
+  private $_pathsToLocate;           // The location, on the server, to look for a file
+  private $_fileLocation;           // The location, on the server, of the file to serve
   private $_mimeTypes = array(      // File MIME types
     '3dm' => 'x-world/x-3dmf', '3dmf' => 'x-world/x-3dmf', 'a' => 'application/octet-stream', 'aab' => 'application/x-authorware-bin',
     'aam' => 'application/x-authorware-map', 'aas' => 'application/x-authorware-seg', 'abc' => 'text/vnd.abc', 'acgi' => 'text/html',
@@ -173,36 +177,46 @@ class FileServer {
 
   function __construct( $url ) {
 
-    $fileExtension = pathinfo( $url, PATHINFO_EXTENSION );
-
     $this->_url = $url;
-    $this->_fileExtension = $fileExtension;
+    $this->_fileExtension = pathinfo( $url, PATHINFO_EXTENSION );
+    $this->_baseName = pathinfo( $url, PATHINFO_BASENAME );
+    $this->_dirName = '/' . pathinfo( $url, PATHINFO_DIRNAME );
 
   }
 
   function fileExists() {
 
-    // Rewrite this to allow for STATIC_URL and MEDIA_URL variables
+    if ($this->isCorrectDirectory()) {
 
-    $replacees = array( "\\", "../../" . strtolower(Config::PROJECT_NAME), Config::STATIC_DIRECTORY . "/" );
-    $replacers = array( "/", "", "" );
+      $this->_pathsToLocate = array(
+        '../../' . strtolower(Config::PROJECT_NAME) . Config::STATIC_DIRECTORY . '/' . $this->_baseName,
+        '../../' . strtolower(Config::PROJECT_NAME) . Config::MEDIA_DIRECTORY . '/' . $this->_baseName,
+      );
 
-    if (file_exists( '../../' . strtolower(Config::PROJECT_NAME) . Config::STATIC_DIRECTORY ) && is_dir('../../' . strtolower(Config::PROJECT_NAME) . Config::STATIC_DIRECTORY)) {
-
-      $di = new RecursiveDirectoryIterator('../../' . strtolower(Config::PROJECT_NAME) . Config::STATIC_DIRECTORY);
-
-      foreach ( new RecursiveIteratorIterator($di) as $filename => $file ) {
-  
-        $changedname = str_replace( $replacees, $replacers, $filename );
-        if ( $changedname == $this->_url ) {
-
-          $this->_fileLocation = $file;
-
+      foreach ($this->_pathsToLocate as $pathToLocate) {
+        if ( file_exists($pathToLocate) && is_file($pathToLocate)) {
+          $this->_fileLocation = $pathToLocate;
           return true;
-
         }
       }
+      
+
+      
+
+
     }
+    return false;
+
+  }
+
+  function isCorrectDirectory() {
+
+    if ( $this->_dirName == '/.' && (Config::STATIC_URL === '' || Config::MEDIA_URL === '') )
+      return true;
+
+    else if ($this->_dirName === Config::STATIC_URL || $this->_dirName === Config::MEDIA_URL)
+      return true;
+
     return false;
 
   }
@@ -216,7 +230,6 @@ class FileServer {
     flush();
     readfile( $this->_fileLocation );
     
-
   }
 
 }

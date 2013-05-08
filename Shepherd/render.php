@@ -13,7 +13,7 @@ class Render {
     $this->_data = $data;
 
     // Loads Twig
-    require_once '../twig/Autoloader.php';
+    require_once '../Twig/Autoloader.php';
     Twig_Autoloader::register();
 
     $templateDir = '../../'.strtolower( Config::PROJECT_NAME ).Config::TEMPLATES_DIRECTORY;
