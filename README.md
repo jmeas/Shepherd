@@ -1,6 +1,6 @@
 #Shepherd
 
-_version 0.5.0_
+_version 0.5.1_
 
 Shepherd is a simple PHP framework that was influenced by the [MVC](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) and [RMR](http://www.peej.co.uk/articles/rmr-architecture.html) architectures.
 
