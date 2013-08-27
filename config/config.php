@@ -2,42 +2,30 @@
 
 class Config {
 
-  // The name of your project;
-  // also the directory that your project is in
+  // The directory that your project is in
+  const PROJECT_NAME = 'myapp';
 
-  const PROJECT_NAME = 'my-app';
+  // If your site is in a directory other than the root.
+  // For instance, if your app is located at www.example.com/myapp
+  // the BASE_URL would be myapp
+  const BASE_URL = '';
 
-  // Turn on error display
-  
+  // Turn on error display. This feature is very limited.
   const DEBUG = true;
 
-  // The default username and password
-  // to the Shepherd Admin Panel:
-  // http://yoursite.com/admin
+  // The directory to access user-uploaded media
+  const MEDIA_DIRECTORY = '/media';
 
-  const ADMIN_USER = '';
-  const ADMIN_PW = '';
-
-  // The directory for user-uploaded media
-  const MEDIA_DIRECTORY = '/what';
-
-  // The base Url to access media files
-  const MEDIA_URL = '/media';
-
-  // The directory in your webapp where you store static files
+  // The directory for your app's static files
   const STATIC_DIRECTORY = '/static';
-
-  // The base Url to access those static files
-  const STATIC_URL = '';
-
-  // The spot for your data files: XML, JSON, and so on
-  const DATA_DIRECTORY = '/data';
 
   // Where you keep your app's view files
   const VIEWS_DIRECTORY = '/views';
 
-  const TEMPLATES_DIRECTORY = '/templates';
+  // Useful PHP scripts you might reference across your views
+  const UTILS_DIRECTORY = '/utils';
 
-  const LOGIN_URL = 'login';
+  // Where you store your templates
+  const TEMPLATES_DIRECTORY = '/templates';
 
 }
