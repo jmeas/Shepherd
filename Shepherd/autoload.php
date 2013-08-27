@@ -1,32 +1,29 @@
 <?php
 
-// Loads shepherd up
+// Initiate a new web request
+new WebRequest();
 
-new Shepherd();
-
-// Automatically load classes
-
+// Autoload our classes
 function __autoload( $class ) {
-
-  // Loads shepherd classes
 
   // Config file
   if ( $class === 'Config' && file_exists('../../Config.php') )
     require_once( '../../Config.php' );
 
+  // Your app's URLs
+  else if ( $class === 'Urls' && file_exists('../../' . Config::PROJECT_NAME . '/urls.php') )
+    require_once( '../../' . Config::PROJECT_NAME . '/urls.php' );
+
   // Shepherd base classes
   else if ( file_exists(strtolower($class) . '.php') )
     require_once( strtolower($class) . '.php' );
 
-  // Shepherd utils
-  else if ( file_exists('utils/' . strtolower($class) . '.php') )
-    require_once( 'utils/' . strtolower($class) . '.php' );
-
-  // Your app's urls
-  else if ( $class === 'Urls' && file_exists('../../' . Config::PROJECT_NAME . '/urls.php') )
-    require_once( '../../' . Config::PROJECT_NAME . '/urls.php' );
-
   // Your app's views
   else if ( file_exists('../../' . Config::PROJECT_NAME . '/' . Config::VIEWS_DIRECTORY . '/' . strtolower($class) . '.php') )
     require_once( '../../' . Config::PROJECT_NAME . '/' . Config::VIEWS_DIRECTORY . '/' . strtolower($class) . '.php' );
+
+  // Your app's utils
+  else if ( file_exists('../../' . Config::PROJECT_NAME . '/' . Config::UTILS_DIRECTORY . '/' . strtolower($class) . '.php') )
+    require_once( '../../' . Config::PROJECT_NAME . '/' . Config::UTILS_DIRECTORY . '/' . strtolower($class) . '.php' );
+
 }
