@@ -4,6 +4,8 @@ _version 0.6.0_
 
 Shepherd is a small PHP framework that promotes the MVC pattern for building webapps.
 
+It was just a personal exploration to learn more about the `MVC` pattern of building webapps, and not something I would recommend for production.
+
 ##Installation
 
 To start, place the Shepherd source files in `Frameworks/Shepherd/`.
